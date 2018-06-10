@@ -90,9 +90,9 @@ namespace KursachAttemp2.Models
                     double dTime = Math.Abs(way[k+1] - way[k]);
                     double dDistance = Math.Abs(way[k + 1].Position - way[k].Position);
                     _timeMatrix.Add(dTime, way[k].Title, way[k + 1].Title);
-                    _timeMatrix.Add(dTime, way[k + 1].Title, way[k].Title);
+                    //_timeMatrix.Add(dTime, way[k + 1].Title, way[k].Title);
                     _distanceMatrix.Add(dDistance, way[k].Title, way[k + 1].Title);
-                    _distanceMatrix.Add(dDistance, way[k + 1].Title, way[k].Title);
+                    //_distanceMatrix.Add(dDistance, way[k + 1].Title, way[k].Title);
                 }
             }
         }
@@ -142,7 +142,7 @@ namespace KursachAttemp2.Models
             int start = _timeMatrix[start_];
             int stop = _timeMatrix[stop_];
             pathDisplay = new Stack<double>();
-            if (start > stop)
+            /*if (start > stop)
             {
                 int tmp = start;
                 start = stop;
@@ -150,7 +150,7 @@ namespace KursachAttemp2.Models
                 string tmp_ = start_;
                 start_ = stop_;
                 stop_ = tmp_;
-            }
+            }*/
             this.isByTime = isByTime;
             if (isByTime)
                 _workMatrix = _timeMatrix;
