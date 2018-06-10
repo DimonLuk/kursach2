@@ -81,6 +81,7 @@
     <Compile Include="gtk-gui\KursachAttemp2.View.FindPathWindow.cs" />
     <Compile Include="Models\CustomGtkEntry.cs" />
     <Compile Include="Models\CustomGtkButton.cs" />
+    <Compile Include="Models\Vertex.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="View\" />

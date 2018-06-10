@@ -32,12 +32,12 @@ namespace KursachAttemp2.View
             {
                 case 0:
                     {
-                        _parent.Graph.WayBetween(startTitle, stopTitle);
+                        //_parent.Graph.WayBetween(startTitle, stopTitle);
                         break;
                     }
                 case 1:
                     {
-                        _parent.Graph.WayBetween(startTitle, stopTitle, false);
+                        //_parent.Graph.WayBetween(startTitle, stopTitle, false);
                         break;
                     }
             }
@@ -51,7 +51,7 @@ namespace KursachAttemp2.View
             _control_container = new List<VBox>();
             try
             {
-                _parent.Graph.CountChanges(ShowPath);
+                //_parent.Graph.CountChanges(ShowPath);
                 int numOfChanges = -1;
                 if(num_of_changes_entry.Text != "")
                 {

@@ -19,6 +19,7 @@ namespace KursachAttemp2.Models
         private IndexKeyMatrix<string, double> _timeMatrix;
         private IndexKeyMatrix<string, double> _distanceMatrix;
         private IndexKeyMatrix<string, double> _workMatrix;
+        private List<Vertex> _vertexes;
         private int[,] _wayMatrix;
         private Stack<string> path;
         private Stack<double> pathDisplay;
@@ -43,9 +44,30 @@ namespace KursachAttemp2.Models
             NumberOfUniquePoints = numberOfUniquePoints;
             path = new Stack<string>();
             pathDisplay = new Stack<double>();
+            _vertexes = new List<Vertex>();
             Ways = ways;
             waysLength = Ways.Count;
             BuildMatrix();
+            BuildList();
+        }
+        private void BuildList()
+        {
+            for (int i = 0; i < NumberOfUniquePoints;i++)
+                _vertexes.Add(new Vertex(i, _timeMatrix[i]));
+            for (int i = 0; i < NumberOfUniquePoints;i++)
+            {
+                var tmp = _vertexes[i];
+                for (int j = 0; j < NumberOfUniquePoints;j++)
+                {
+                    if(_timeMatrix[i,j] != 0 && i != j)
+                    {
+                        tmp.Adjacent.Add(_vertexes[i]);
+                        tmp.Times.Add(_timeMatrix[i, j]);
+                        tmp.Distances.Add(_timeMatrix[i, j]);
+                    }
+                }
+
+            }
         }
         private void CountNumberOfUniquePoints()
         {
@@ -97,7 +119,7 @@ namespace KursachAttemp2.Models
             }
         }
 
-        private void FindTheShortestWays()
+        /*private void FindTheShortestWays()
         {
             for (int i = 0; i < NumberOfUniquePoints; i++)
             {
@@ -150,7 +172,7 @@ namespace KursachAttemp2.Models
                 string tmp_ = start_;
                 start_ = stop_;
                 stop_ = tmp_;
-            }*/
+            }
             this.isByTime = isByTime;
             if (isByTime)
                 _workMatrix = _timeMatrix;
@@ -374,7 +396,7 @@ namespace KursachAttemp2.Models
                 if(contains)
                     p("Changes: " + Changes, "","", 0);
             }
-        }
+        }*/
         public static void Serialize(Graph g, string path)
         {
                 DirectoryInfo di = new DirectoryInfo(path);
