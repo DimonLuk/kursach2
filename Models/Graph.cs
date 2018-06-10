@@ -224,6 +224,7 @@ namespace KursachAttemp2.Models
         {
             int start = _timeMatrix[start_];
             int stop = _timeMatrix[stop_];
+            this.isByTime = isByTime;
             pathDisplay = new Stack<double>();
             Dijkstra(start_, !isByTime);
             var curr = _vertexes[_timeMatrix[stop_]];
@@ -239,9 +240,10 @@ namespace KursachAttemp2.Models
             }
             foreach(var v in _vertexes)
             {
-                v.Distance = Double.MaxValue;
-                v.Time = Double.MaxValue;
+                v.Distance = Double.MaxValue/2;
+                v.Time = Double.MaxValue/2;
                 v.CameFrom = null;
+                v.Marked = false;
             }
         }
         public static T DeepClone<T>(T a)
@@ -304,7 +306,7 @@ namespace KursachAttemp2.Models
             int length = path.Count;
             try
                 {
-                test = path.Pop();
+                /*test = path.Pop();
                 test2 = path.Pop();
                 data = ctrl.Pop();
                 data2 = ctrl.Pop();
@@ -407,7 +409,9 @@ namespace KursachAttemp2.Models
                     {
                         i = 0;
                     }
-                }
+                
+                }*/
+
             } catch(InvalidOperationException)
             {
                 dataSaver = data;
@@ -447,7 +451,13 @@ namespace KursachAttemp2.Models
                         break;
                     }
                 }
-                p(Ways[prevI].Title, test, starttime, Ways[prevI][i].Position);
+                try
+                {
+                    p(Ways[prevI].Title, test, starttime, Ways[prevI][i].Position);
+                } catch(ArgumentOutOfRangeException)
+                {
+                    throw new NoWayException();
+                }
             } catch(ArgumentOutOfRangeException)
             {
                 throw new NoWayException();

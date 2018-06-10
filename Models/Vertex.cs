@@ -27,8 +27,8 @@ namespace KursachAttemp2.Models
         {
             Index = index;
             Name = name;
-            Distance = Double.MaxValue;
-            Time = Double.MaxValue;
+            Distance = Double.MaxValue/2;
+            Time = Double.MaxValue/2;
             Marked = false;
             CameFrom = null;
         }
