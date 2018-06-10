@@ -27,7 +27,7 @@ namespace KursachAttemp2.View
             {
                 var w = new FileNotFoundDialog(_parent, () => { }, "Please fill all fields");
             }
-            //_parent.Graph.BuildMatrix();
+            _parent.Graph.BuildMatrix();
             switch(type_of_search.Active)
             {
                 case 0:
