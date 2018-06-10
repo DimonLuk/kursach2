@@ -21,6 +21,7 @@ namespace KursachAttemp2.Models
         public string Name { get; set; }
 
         public bool Marked { get; set; }
+        public Vertex CameFrom { get; set; }
 
         public Vertex(int index, string name)
         {
@@ -29,6 +30,7 @@ namespace KursachAttemp2.Models
             Distance = Double.MaxValue;
             Time = Double.MaxValue;
             Marked = false;
+            CameFrom = null;
         }
     }
 }

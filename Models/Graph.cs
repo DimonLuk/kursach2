@@ -51,7 +51,6 @@ namespace KursachAttemp2.Models
             waysLength = Ways.Count;
             BuildMatrix();
             BuildList();
-            Dijkstra("A");
         }
         private void BuildList()
         {
@@ -95,7 +94,7 @@ namespace KursachAttemp2.Models
             }
             _vertexes[_timeMatrix[src]].Time = 0;
             _vertexes[_timeMatrix[src]].Distance = 0;
-            while(heap.Count >= 0)
+            while(heap.Count != 0)
             {
                 Vertex u = heap.pop();
                 u.Marked = true;
@@ -109,6 +108,7 @@ namespace KursachAttemp2.Models
                             if (v.Time > u.Time + u.Times[i])
                             {
                                 v.Time = u.Time + u.Times[i];
+                                v.CameFrom = u;
                             }
                         }
                         else
@@ -116,6 +116,7 @@ namespace KursachAttemp2.Models
                             if (v.Distance > u.Distance + u.Distances[i])
                             {
                                 v.Distance = u.Distance + u.Distances[i];
+                                v.CameFrom = u;
                             }
                         } 
                     }
@@ -176,6 +177,7 @@ namespace KursachAttemp2.Models
                     //_distanceMatrix.Add(dDistance, way[k + 1].Title, way[k].Title);
                 }
             }
+            //BuildList();
         }
 
         /*private void FindTheShortestWays()
@@ -217,30 +219,30 @@ namespace KursachAttemp2.Models
                 FindShortestPathBetween(_wayMatrix[start, find], find);
                 return;
             }
-        }
+        }*/
         public void WayBetween(string start_, string stop_, bool isByTime = true)
         {
             int start = _timeMatrix[start_];
             int stop = _timeMatrix[stop_];
             pathDisplay = new Stack<double>();
-            /*if (start > stop)
+            Dijkstra(start_, !isByTime);
+            var curr = _vertexes[_timeMatrix[stop_]];
+            while(true)
             {
-                int tmp = start;
-                start = stop;
-                stop = tmp;
-                string tmp_ = start_;
-                start_ = stop_;
-                stop_ = tmp_;
+                if(curr.CameFrom == null)
+                {
+                    path.Push(curr.Name);
+                    break;
+                }
+                path.Push(curr.Name);
+                curr = curr.CameFrom;
             }
-            this.isByTime = isByTime;
-            if (isByTime)
-                _workMatrix = _timeMatrix;
-            else
-                _workMatrix = _distanceMatrix;
-            FindTheShortestWays();
-            path.Push(stop_);
-            FindShortestPathBetween(start, stop);
-            path.Push(start_);
+            foreach(var v in _vertexes)
+            {
+                v.Distance = Double.MaxValue;
+                v.Time = Double.MaxValue;
+                v.CameFrom = null;
+            }
         }
         public static T DeepClone<T>(T a)
         {
@@ -455,7 +457,7 @@ namespace KursachAttemp2.Models
                 if(contains)
                     p("Changes: " + Changes, "","", 0);
             }
-        }*/
+        }
         public static void Serialize(Graph g, string path)
         {
                 DirectoryInfo di = new DirectoryInfo(path);
