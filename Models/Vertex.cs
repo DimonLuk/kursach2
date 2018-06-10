@@ -14,13 +14,21 @@ namespace KursachAttemp2.Models
         public List<double> Times { get => _times; }
         public List<double> Distances { get => _distances; }
 
+        public double Distance { get; set; }
+        public double Time { get; set; }
+
         public int Index { get; set; }
         public string Name { get; set; }
+
+        public bool Marked { get; set; }
 
         public Vertex(int index, string name)
         {
             Index = index;
             Name = name;
+            Distance = Double.MaxValue;
+            Time = Double.MaxValue;
+            Marked = false;
         }
     }
 }

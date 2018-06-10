@@ -4,6 +4,7 @@ using System.IO;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text.RegularExpressions;
+using C5;
 
 namespace KursachAttemp2.Models
 {
@@ -27,16 +28,17 @@ namespace KursachAttemp2.Models
         public int NumberOfUniquePoints { get; private set; }
         private bool isByTime = false;
         private List<Way> _ways;
-        public List<Way> Ways {
+        public List<Way> Ways
+        {
             get
             {
                 return _ways;
-            } 
+            }
             private set
             {
                 _ways = value;
                 waysLength = _ways.Count;
-            } 
+            }
         }
         private int waysLength;
         public Graph(int numberOfUniquePoints, List<Way> ways)
@@ -49,24 +51,81 @@ namespace KursachAttemp2.Models
             waysLength = Ways.Count;
             BuildMatrix();
             BuildList();
+            Dijkstra("A");
         }
         private void BuildList()
         {
-            for (int i = 0; i < NumberOfUniquePoints;i++)
+            for (int i = 0; i < NumberOfUniquePoints; i++)
                 _vertexes.Add(new Vertex(i, _timeMatrix[i]));
-            for (int i = 0; i < NumberOfUniquePoints;i++)
+            for (int i = 0; i < NumberOfUniquePoints; i++)
             {
                 var tmp = _vertexes[i];
-                for (int j = 0; j < NumberOfUniquePoints;j++)
+                for (int j = 0; j < NumberOfUniquePoints; j++)
                 {
-                    if(_timeMatrix[i,j] != 0 && i != j)
+                    if (_timeMatrix[i, j] != 0 && i != j)
                     {
-                        tmp.Adjacent.Add(_vertexes[i]);
+                        tmp.Adjacent.Add(_vertexes[j]);
                         tmp.Times.Add(_timeMatrix[i, j]);
                         tmp.Distances.Add(_timeMatrix[i, j]);
                     }
                 }
-
+            }
+            foreach(var v in _vertexes)
+            {
+                Console.Write($"{v.Name}");
+                Console.WriteLine();
+                foreach(var u in v.Adjacent)
+                {
+                    Console.Write($"{u.Name}, ");
+                }
+                Console.WriteLine();
+            }
+        }
+        private void Dijkstra(string src, bool isByDistance = false)
+        {
+            var heap = new PriorityQueue<Vertex>(Comparer<Vertex>.Create((v1,v2)=>{
+                if (v1.Time < v2.Time) return 1;
+                if (v1.Time == v2.Time) return 0;
+                if (v1.Time > v2.Time) return -1;
+                return 0;
+            }));
+            foreach(var v in _vertexes)
+            {
+                heap.push(v);
+            }
+            _vertexes[_timeMatrix[src]].Time = 0;
+            _vertexes[_timeMatrix[src]].Distance = 0;
+            while(heap.Count >= 0)
+            {
+                Vertex u = heap.pop();
+                u.Marked = true;
+                for (int i = 0; i < u.Adjacent.Count;i++)
+                {
+                    Vertex v = u.Adjacent[i];
+                    if(v.Marked == false)
+                    {
+                        if (!isByDistance)
+                        {
+                            if (v.Time > u.Time + u.Times[i])
+                            {
+                                v.Time = u.Time + u.Times[i];
+                            }
+                        }
+                        else
+                        {
+                            if (v.Distance > u.Distance + u.Distances[i])
+                            {
+                                v.Distance = u.Distance + u.Distances[i];
+                            }
+                        } 
+                    }
+                }
+                heap.heapify();
+            }
+            foreach(var v in _vertexes)
+            {
+                Console.WriteLine();
+                Console.Write($"{v.Name}:{v.Time}, ");
             }
         }
         private void CountNumberOfUniquePoints()
