@@ -220,7 +220,7 @@ namespace KursachAttemp2.Models
             bool contains = false;
             int length = path.Count;
             try
-            {
+                {
                 test = path.Pop();
                 test2 = path.Pop();
                 data = ctrl.Pop();
