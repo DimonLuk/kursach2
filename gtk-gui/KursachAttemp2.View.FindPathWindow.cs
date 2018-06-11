@@ -36,6 +36,8 @@ namespace KursachAttemp2.View
 
 		private global::Gtk.Label label7;
 
+		private global::Gtk.Label label4;
+
 		private global::Gtk.VBox path_main_container;
 
 		protected virtual void Build()
@@ -169,21 +171,31 @@ namespace KursachAttemp2.View
 			global::Gtk.Box.BoxChild w13 = ((global::Gtk.Box.BoxChild)(this.hbox3[this.label7]));
 			w13.Position = 2;
 			w13.Fill = false;
-			this.vbox3.Add(this.hbox3);
-			global::Gtk.Box.BoxChild w14 = ((global::Gtk.Box.BoxChild)(this.vbox3[this.hbox3]));
-			w14.Position = 0;
+			// Container child hbox3.Gtk.Box+BoxChild
+			this.label4 = new global::Gtk.Label();
+			this.label4.Name = "label4";
+			this.label4.LabelProp = global::Mono.Unix.Catalog.GetString("Stop\'s rel distance");
+			this.hbox3.Add(this.label4);
+			global::Gtk.Box.BoxChild w14 = ((global::Gtk.Box.BoxChild)(this.hbox3[this.label4]));
+			w14.PackType = ((global::Gtk.PackType)(1));
+			w14.Position = 3;
 			w14.Expand = false;
 			w14.Fill = false;
+			this.vbox3.Add(this.hbox3);
+			global::Gtk.Box.BoxChild w15 = ((global::Gtk.Box.BoxChild)(this.vbox3[this.hbox3]));
+			w15.Position = 0;
+			w15.Expand = false;
+			w15.Fill = false;
 			// Container child vbox3.Gtk.Box+BoxChild
 			this.path_main_container = new global::Gtk.VBox();
 			this.path_main_container.Name = "path_main_container";
 			this.path_main_container.Spacing = 6;
 			this.vbox3.Add(this.path_main_container);
-			global::Gtk.Box.BoxChild w15 = ((global::Gtk.Box.BoxChild)(this.vbox3[this.path_main_container]));
-			w15.Position = 1;
-			this.vbox1.Add(this.vbox3);
-			global::Gtk.Box.BoxChild w16 = ((global::Gtk.Box.BoxChild)(this.vbox1[this.vbox3]));
+			global::Gtk.Box.BoxChild w16 = ((global::Gtk.Box.BoxChild)(this.vbox3[this.path_main_container]));
 			w16.Position = 1;
+			this.vbox1.Add(this.vbox3);
+			global::Gtk.Box.BoxChild w17 = ((global::Gtk.Box.BoxChild)(this.vbox1[this.vbox3]));
+			w17.Position = 1;
 			w1.Add(this.vbox1);
 			this.GtkScrolledWindow.Add(w1);
 			this.Add(this.GtkScrolledWindow);
@@ -191,7 +203,7 @@ namespace KursachAttemp2.View
 			{
 				this.Child.ShowAll();
 			}
-			this.DefaultWidth = 1080;
+			this.DefaultWidth = 1176;
 			this.DefaultHeight = 300;
 			this.Show();
 			this.button1.Clicked += new global::System.EventHandler(this.OnButtonFindClickedHanlder);

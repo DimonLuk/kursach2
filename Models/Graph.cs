@@ -282,6 +282,10 @@ namespace KursachAttemp2.Models
 
             return temp;
         }
+        public void ShowAnotherPaths()
+        {
+            
+        }
         public void CountChanges(ProccesPath p)
         {
              var pr = DeepClone<Stack<string>>(path);
@@ -349,9 +353,14 @@ namespace KursachAttemp2.Models
                             data2 = ctrl.Pop();
                             first = false;
                             j = 0;
-                        } else if(j != 0 && Ways[i][j].Title == test && (Ways[i][j+1].Title == test2 || Ways[i][j-1].Title == test2)/* &&
+                        } else if(j != 0 && Ways[i][j].Title == test && (Ways[i][j+1].Title == test2 /*|| Ways[i][j-1].Title == test2*/)/* &&
                                   (((isByTime && data == Convert.ToDouble(Ways[i][j].StartTime.Ticks)) || (!isByTime && data == Ways[i][j].Position)) && (((isByTime && data2 == Convert.ToDouble(Ways[i][j + 1].StartTime.Ticks)) || (!isByTime && data2 == Ways[i][j + 1].Position)) || ((isByTime && data2 == Convert.ToDouble(Ways[i][j - 1].StartTime.Ticks)) || (!isByTime && data2 == Ways[i][j - 1].Position))))*/)
                         {
+                            if (i != prevI)
+                            {
+                                Changes++;
+                                prevI = i;
+                            }
                             prevI = i;
                             p(Ways[i].Title, test, Ways[i][j].StartTimeString, Ways[i][j].Position);
                             saver = test;
@@ -379,7 +388,7 @@ namespace KursachAttemp2.Models
                             data2 = ctrl.Pop();
                             j = 0;
                         }
-                        else if(j != 0 && Ways[i][j].Title == test && (Ways[i][j + 1].Title == test2 || Ways[i][j - 1].Title == test2) /*&&
+                        else if(j != 0 && Ways[i][j].Title == test && (Ways[i][j + 1].Title == test2 /*|| Ways[i][j - 1].Title == test2*/) /*&&
                                 (((isByTime && data == Convert.ToDouble(Ways[i][j].StartTime.Ticks)) || (!isByTime && data == Ways[i][j].Position)) && (((isByTime && data2 == Convert.ToDouble(Ways[i][j + 1].StartTime.Ticks)) || (!isByTime && data2 == Ways[i][j + 1].Position)) || ((isByTime && data2 == Convert.ToDouble(Ways[i][j - 1].StartTime.Ticks)) || (!isByTime && data2 == Ways[i][j - 1].Position))))*/)
                         {
                             p(Ways[i].Title, test, Ways[i][j].StartTimeString, Ways[i][j].Position);
@@ -483,7 +492,7 @@ namespace KursachAttemp2.Models
                 throw new NoWayException();
             }
             finally
-            {
+            {   
                 if(contains)
                     p("Changes: " + Changes, "","", 0);
             }

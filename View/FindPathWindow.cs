@@ -67,6 +67,7 @@ namespace KursachAttemp2.View
             catch(FormatException)
             {}
             Child.ShowAll();
+
         }
         private void ShowPath(string wayTitle, string stopTitle, string arriveTime, double position)
         {
