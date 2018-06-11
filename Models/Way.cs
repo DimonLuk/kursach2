@@ -16,6 +16,7 @@ namespace KursachAttemp2.Models
         private List<Stop> Stops { get; set; }
         public DateTime StartTime { get { return Stops[0].StartTime; } }
         public int Count { get { return Stops.Count; } }
+        public string Type { get; set; }
         public Way()
         {
 

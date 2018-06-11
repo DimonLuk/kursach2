@@ -18,6 +18,10 @@ namespace KursachAttemp2.View
 
 		private global::Gtk.Entry num_of_stops;
 
+		private global::Gtk.Label label1;
+
+		private global::Gtk.Entry way_type_entry;
+
 		private global::Gtk.Button start_adding_way_button;
 
 		private global::Gtk.VBox stop_getting_info_container;
@@ -83,28 +87,46 @@ namespace KursachAttemp2.View
 			global::Gtk.Box.BoxChild w5 = ((global::Gtk.Box.BoxChild)(this.hbox5[this.num_of_stops]));
 			w5.Position = 3;
 			// Container child hbox5.Gtk.Box+BoxChild
+			this.label1 = new global::Gtk.Label();
+			this.label1.Name = "label1";
+			this.label1.LabelProp = global::Mono.Unix.Catalog.GetString("Type");
+			this.hbox5.Add(this.label1);
+			global::Gtk.Box.BoxChild w6 = ((global::Gtk.Box.BoxChild)(this.hbox5[this.label1]));
+			w6.Position = 4;
+			w6.Expand = false;
+			w6.Fill = false;
+			// Container child hbox5.Gtk.Box+BoxChild
+			this.way_type_entry = new global::Gtk.Entry();
+			this.way_type_entry.CanFocus = true;
+			this.way_type_entry.Name = "way_type_entry";
+			this.way_type_entry.IsEditable = true;
+			this.way_type_entry.InvisibleChar = '●';
+			this.hbox5.Add(this.way_type_entry);
+			global::Gtk.Box.BoxChild w7 = ((global::Gtk.Box.BoxChild)(this.hbox5[this.way_type_entry]));
+			w7.Position = 5;
+			// Container child hbox5.Gtk.Box+BoxChild
 			this.start_adding_way_button = new global::Gtk.Button();
 			this.start_adding_way_button.CanFocus = true;
 			this.start_adding_way_button.Name = "start_adding_way_button";
 			this.start_adding_way_button.UseUnderline = true;
 			this.start_adding_way_button.Label = global::Mono.Unix.Catalog.GetString("Start adding");
 			this.hbox5.Add(this.start_adding_way_button);
-			global::Gtk.Box.BoxChild w6 = ((global::Gtk.Box.BoxChild)(this.hbox5[this.start_adding_way_button]));
-			w6.Position = 4;
-			w6.Expand = false;
-			w6.Fill = false;
+			global::Gtk.Box.BoxChild w8 = ((global::Gtk.Box.BoxChild)(this.hbox5[this.start_adding_way_button]));
+			w8.Position = 6;
+			w8.Expand = false;
+			w8.Fill = false;
 			this.vbox8.Add(this.hbox5);
-			global::Gtk.Box.BoxChild w7 = ((global::Gtk.Box.BoxChild)(this.vbox8[this.hbox5]));
-			w7.Position = 0;
-			w7.Expand = false;
-			w7.Fill = false;
+			global::Gtk.Box.BoxChild w9 = ((global::Gtk.Box.BoxChild)(this.vbox8[this.hbox5]));
+			w9.Position = 0;
+			w9.Expand = false;
+			w9.Fill = false;
 			// Container child vbox8.Gtk.Box+BoxChild
 			this.stop_getting_info_container = new global::Gtk.VBox();
 			this.stop_getting_info_container.Name = "stop_getting_info_container";
 			this.stop_getting_info_container.Spacing = 6;
 			this.vbox8.Add(this.stop_getting_info_container);
-			global::Gtk.Box.BoxChild w8 = ((global::Gtk.Box.BoxChild)(this.vbox8[this.stop_getting_info_container]));
-			w8.Position = 1;
+			global::Gtk.Box.BoxChild w10 = ((global::Gtk.Box.BoxChild)(this.vbox8[this.stop_getting_info_container]));
+			w10.Position = 1;
 			// Container child vbox8.Gtk.Box+BoxChild
 			this.add_way_button = new global::Gtk.Button();
 			this.add_way_button.CanFocus = true;
@@ -112,10 +134,10 @@ namespace KursachAttemp2.View
 			this.add_way_button.UseUnderline = true;
 			this.add_way_button.Label = global::Mono.Unix.Catalog.GetString("Add all");
 			this.vbox8.Add(this.add_way_button);
-			global::Gtk.Box.BoxChild w9 = ((global::Gtk.Box.BoxChild)(this.vbox8[this.add_way_button]));
-			w9.Position = 2;
-			w9.Expand = false;
-			w9.Fill = false;
+			global::Gtk.Box.BoxChild w11 = ((global::Gtk.Box.BoxChild)(this.vbox8[this.add_way_button]));
+			w11.Position = 2;
+			w11.Expand = false;
+			w11.Fill = false;
 			w1.Add(this.vbox8);
 			this.GtkScrolledWindow.Add(w1);
 			this.Add(this.GtkScrolledWindow);

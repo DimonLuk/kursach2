@@ -344,6 +344,30 @@
                       </packing>
                     </child>
                     <child>
+                      <widget class="Gtk.Label" id="label1">
+                        <property name="MemberName" />
+                        <property name="LabelProp" translatable="yes">Type</property>
+                      </widget>
+                      <packing>
+                        <property name="Position">4</property>
+                        <property name="AutoSize">True</property>
+                        <property name="Expand">False</property>
+                        <property name="Fill">False</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <widget class="Gtk.Entry" id="way_type_entry">
+                        <property name="MemberName" />
+                        <property name="CanFocus">True</property>
+                        <property name="IsEditable">True</property>
+                        <property name="InvisibleChar">●</property>
+                      </widget>
+                      <packing>
+                        <property name="Position">5</property>
+                        <property name="AutoSize">True</property>
+                      </packing>
+                    </child>
+                    <child>
                       <widget class="Gtk.Button" id="start_adding_way_button">
                         <property name="MemberName" />
                         <property name="CanFocus">True</property>
@@ -353,7 +377,7 @@
                         <signal name="Clicked" handler="OnStartAddingButtonClicked" />
                       </widget>
                       <packing>
-                        <property name="Position">4</property>
+                        <property name="Position">6</property>
                         <property name="AutoSize">True</property>
                         <property name="Expand">False</property>
                         <property name="Fill">False</property>

@@ -69,11 +69,14 @@ namespace KursachAttemp2.View
             Child.ShowAll();
 
         }
-        private void ShowPath(string wayTitle, string stopTitle, string arriveTime, double position)
+        private void ShowPath(string wayTitle, string wayType,string stopTitle, string arriveTime, double position)
         {
             var title_label = new Label();
             title_label.Name = "title_label";
             title_label.LabelProp = wayTitle;
+
+            var way_type = new Label();
+            way_type.LabelProp = wayType;
 
             var title_stop_label = new Label();
             title_stop_label.Name = "title_stop_label";
@@ -89,6 +92,7 @@ namespace KursachAttemp2.View
 
             var hbox = new HBox();
             hbox.Add(title_label);
+            hbox.Add(way_type);
             hbox.Add(title_stop_label);
             hbox.Add(time_stop_label);
             hbox.Add(time_position_label);

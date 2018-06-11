@@ -54,11 +54,16 @@ public partial class MainWindow : Gtk.Window, IGraph
             tmp_way_title.Name = "way_title";
             tmp_way_title.LabelProp = "Way title:";
 
-            var tmp_way_title_value = new CustomGtkEntry(counter, 0, "way");
+            var tmp_way_title_value = new CustomGtkEntry(counter, 0, "wayTitle");
             tmp_way_title_value.Name = "way_title_value";
             tmp_way_title_value.Text = w.Title;
             tmp_way_title_value.Changed += DataBinding;
             _ways_container.Add(tmp_way_title_value);
+
+            var tmp_way_type_value = new CustomGtkEntry(counter, 0, "wayType");
+            tmp_way_type_value.Name = "way_type";
+            tmp_way_type_value.Text = w.Type;
+            tmp_way_type_value.Changed += DataBinding;
 
             /*var tmp_way_start_time = new global::Gtk.Label();
             tmp_way_start_time.Name = "way_start_time";
@@ -82,6 +87,7 @@ public partial class MainWindow : Gtk.Window, IGraph
             tmp_hbox1_way_info_container.Add(tmp_way_title);
             tmp_hbox1_way_info_container.Add(tmp_way_title_value);
             tmp_hbox1_way_info_container.Add(delete_way_button);
+            tmp_hbox1_way_info_container.Add(tmp_way_type_value);
             //tmp_hbox1_way_info_container.Add(tmp_way_start_time);
             //tmp_hbox1_way_info_container.Add(tmp_way_start_time_value);
 
@@ -281,9 +287,13 @@ public partial class MainWindow : Gtk.Window, IGraph
     protected void DataBinding(object sender, EventArgs e)
     {
         var m = (CustomGtkEntry)sender;
-        if (m.Type == "way")
+        if (m.Type == "wayTitle")
         {
             graph.Ways[m.WayIndex].Title = m.Text;
+        }
+        else if(m.Type == "wayType")
+        {
+            graph.Ways[m.WayIndex].Type = m.Text;
         }
         else if (m.Type == "stopTitle")
         {

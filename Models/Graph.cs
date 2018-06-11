@@ -16,7 +16,7 @@ namespace KursachAttemp2.Models
             NO_WAY_EXISTS = -1,
             WAY_EXISTS = 1
         }
-        public delegate void ProccesPath(string wayTitle, string stopTitle, string starttime, double position);
+        public delegate void ProccesPath(string wayTitle, string wayType, string stopTitle, string starttime, double position);
         private IndexKeyMatrix<string, double> _timeMatrix;
         private IndexKeyMatrix<string, double> _distanceMatrix;
         private IndexKeyMatrix<string, double> _workMatrix;
@@ -344,7 +344,7 @@ namespace KursachAttemp2.Models
                            (((isByTime && data == Convert.ToDouble(Ways[i][j].StartTime.Ticks)) || (!isByTime && data == Ways[i][j].Position)) && (((isByTime && data2 == Convert.ToDouble(Ways[i][j+1].StartTime.Ticks)) || (!isByTime && data2 == Ways[i][j+1].Position))))*/)
                         {
                             prevI = i;
-                            p(Ways[i].Title, test, Ways[i][j].StartTimeString, Ways[i][j].Position);
+                            p(Ways[i].Title, Ways[i].Type, test, Ways[i][j].StartTimeString, Ways[i][j].Position);
                             saver = test;
                             test = test2;
                             test2 = path.Pop();
@@ -362,7 +362,7 @@ namespace KursachAttemp2.Models
                                 prevI = i;
                             }
                             prevI = i;
-                            p(Ways[i].Title, test, Ways[i][j].StartTimeString, Ways[i][j].Position);
+                            p(Ways[i].Title, Ways[i].Type, test, Ways[i][j].StartTimeString, Ways[i][j].Position);
                             saver = test;
                             test = test2;
                             test2 = path.Pop();
@@ -374,7 +374,7 @@ namespace KursachAttemp2.Models
                         }
                         else if(Ways[i][j].Title == test && j == 0 && (Ways[i][j + 1].Title == test2) && !first /*&& (((isByTime && data == Convert.ToDouble(Ways[i][j].StartTime.Ticks)) || (!isByTime && data == Ways[i][j].Position)) && (((isByTime && data2 == Convert.ToDouble(Ways[i][j + 1].StartTime.Ticks)) || (!isByTime && data2 == Ways[i][j + 1].Position))))*/)
                         {
-                            p(Ways[i].Title, test, Ways[i][j].StartTimeString, Ways[i][j].Position);
+                            p(Ways[i].Title, Ways[i].Type, test, Ways[i][j].StartTimeString, Ways[i][j].Position);
                             if(i != prevI)
                             {
                                 Changes++;
@@ -391,7 +391,7 @@ namespace KursachAttemp2.Models
                         else if(j != 0 && Ways[i][j].Title == test && (Ways[i][j + 1].Title == test2 /*|| Ways[i][j - 1].Title == test2*/) /*&&
                                 (((isByTime && data == Convert.ToDouble(Ways[i][j].StartTime.Ticks)) || (!isByTime && data == Ways[i][j].Position)) && (((isByTime && data2 == Convert.ToDouble(Ways[i][j + 1].StartTime.Ticks)) || (!isByTime && data2 == Ways[i][j + 1].Position)) || ((isByTime && data2 == Convert.ToDouble(Ways[i][j - 1].StartTime.Ticks)) || (!isByTime && data2 == Ways[i][j - 1].Position))))*/)
                         {
-                            p(Ways[i].Title, test, Ways[i][j].StartTimeString, Ways[i][j].Position);
+                            p(Ways[i].Title, Ways[i].Type, test, Ways[i][j].StartTimeString, Ways[i][j].Position);
                             if(i != prevI)
                             {
                                 Changes++;
@@ -408,7 +408,7 @@ namespace KursachAttemp2.Models
                                 j+1 == Ways[i].Count-1 && first /*&& ((isByTime && data2 == Convert.ToDouble(Ways[i][j + 1].StartTime.Ticks)) || (!isByTime && data2 == Ways[i][j + 1].Position))*/)
                         {
                             prevI = i;
-                            p(Ways[i].Title, test, Ways[i][j].StartTimeString, Ways[i][j].Position);
+                            p(Ways[i].Title, Ways[i].Type, test, Ways[i][j].StartTimeString, Ways[i][j].Position);
                             saver = test;
                             test = test2;
                             test2 = path.Pop();
@@ -421,7 +421,7 @@ namespace KursachAttemp2.Models
                         else if(j-1 > 0 && Ways[i][j+1].Title == test && (Ways[i][j - 1].Title == test2) &&
                                 j+1 == Ways[i].Count-1 && !first /*&& ((isByTime && data2 == Convert.ToDouble(Ways[i][j + 1].StartTime.Ticks)) || (!isByTime && data2 == Ways[i][j + 1].Position))*/)
                         {
-                            p(Ways[i].Title, test, Ways[i][j].StartTimeString, Ways[i][j].Position);
+                            p(Ways[i].Title, Ways[i].Type, test, Ways[i][j].StartTimeString, Ways[i][j].Position);
                             if (i != prevI)
                             {
                                 Changes++;
@@ -482,7 +482,7 @@ namespace KursachAttemp2.Models
                 }
                 try
                 {
-                    p(Ways[prevI].Title, test, starttime, Ways[prevI][i].Position);
+                    p(Ways[prevI].Title, Ways[i].Type, test, starttime, Ways[prevI][i].Position);
                 } catch(ArgumentOutOfRangeException)
                 {
                     throw new NoWayException();
@@ -494,7 +494,7 @@ namespace KursachAttemp2.Models
             finally
             {   
                 if(contains)
-                    p("Changes: " + Changes, "","", 0);
+                    p("Changes: " + Changes, "","","", 0);
             }
         }
         public static void Serialize(Graph g, string path)

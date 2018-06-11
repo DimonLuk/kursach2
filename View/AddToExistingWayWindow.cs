@@ -177,6 +177,7 @@ namespace KursachAttemp2.View
                     }
                     stops[0].Position = 0;
                     way = new Way(way_title, stops);
+                    way.Type = way_type_entry.Text;
                     g = Graph.Deserialize(_parent.Path_);
                     /*List<string> count = new List<string>();
                     for (int i = 0; i < g.Ways.Count; i++)
